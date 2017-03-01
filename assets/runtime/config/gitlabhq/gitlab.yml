@@ -464,7 +464,6 @@ production: &base
     # real path not the symlink.
     storages: # You must have at least a `default` storage path.
       default: {{GITLAB_REPOS_DIR}}/
-      nfs: /home/git/gitlab-persistent/
 
   ## Backup settings
   backup:

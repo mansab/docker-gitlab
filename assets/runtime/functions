@@ -1049,10 +1049,12 @@ initialize_datadir() {
   chown -R root: ${GITLAB_DATA_DIR}/ssh
 
   # create the repositories directory and make sure it has the right permissions
-  mkdir -p ${GITLAB_REPOS_DIR}
-  chown ${GITLAB_USER}: ${GITLAB_REPOS_DIR}
-  chmod ug+rwX,o-rwx ${GITLAB_REPOS_DIR}
-  exec_as_git chmod g+s ${GITLAB_REPOS_DIR}
+
+# Disable permission management for repositories directory
+#  mkdir -p ${GITLAB_REPOS_DIR}
+#  chown ${GITLAB_USER}: ${GITLAB_REPOS_DIR}
+#  chmod ug+rwX,o-rwx ${GITLAB_REPOS_DIR}
+#  exec_as_git chmod g+s ${GITLAB_REPOS_DIR}
 
   # create build traces directory
   mkdir -p ${GITLAB_BUILDS_DIR}
@@ -1133,10 +1135,12 @@ initialize_datadir() {
 
 sanitize_datadir() {
   echo "Sanitizing datadir. Please be patient..."
-  chmod -R ug+rwX,o-rwx ${GITLAB_REPOS_DIR}/
-  chmod -R ug-s ${GITLAB_REPOS_DIR}/
-  find ${GITLAB_REPOS_DIR}/ -type d -print0 | xargs -0 chmod g+s
-  chown -R ${GITLAB_USER}: ${GITLAB_REPOS_DIR}
+
+# Disable managing permissions for repositories directory
+#  chmod -R ug+rwX,o-rwx ${GITLAB_REPOS_DIR}/
+#  chmod -R ug-s ${GITLAB_REPOS_DIR}/
+#  find ${GITLAB_REPOS_DIR}/ -type d -print0 | xargs -0 chmod g+s
+#  chown -R ${GITLAB_USER}: ${GITLAB_REPOS_DIR}
 
   chmod -R u+rwX ${GITLAB_BUILDS_DIR}
   chown -R ${GITLAB_USER}: ${GITLAB_BUILDS_DIR}
